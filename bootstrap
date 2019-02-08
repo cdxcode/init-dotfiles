@@ -32,7 +32,6 @@ echoerrcolor() {
 			darkmagenta)
 				str="\e[1;35m"
 				;;
-
 		esac
 		echo -ne $str >&2;
 	fi
@@ -419,6 +418,7 @@ if (( $installerrun )); then
 		done
 	fi
 fi
+
 if (( $getgitinfo )); then
 	$(git config user.name >& /dev/null)
 	if [ $? -ne 0 ]; then
@@ -516,3 +516,5 @@ echoerrnocolor
 if ! (( $testmode )); then
 	eval $setupshell
 fi
+
+cd $prefixfull
