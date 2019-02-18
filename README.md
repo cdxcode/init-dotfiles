@@ -5,11 +5,7 @@ Get Running in 5 Minutes
 ------------------------
 
 ```bash
-    curl -fsSLO https://raw.githubusercontent.com/cdxcode/init-dotfiles/master/bootstrap
-
-    chmod +x ./bootstrap
-
-    ./bootstrap
+    curl -L https://raw.githubusercontent.com/cdxcode/init-dotfiles/master/bin/install | fish
 ```
 
 Usage
