@@ -1,15 +1,15 @@
 Init Dotfiles
 =============
 
-Get Running in 5 Minutes
-------------------------
+Running 5 Minutes
+------------------
 
 ```bash
     curl -L https://raw.githubusercontent.com/cdxcode/init-dotfiles/master/bin/install | fish
 ```
 
 Usage
---------------------
+-----
 
 - `test` - Test mode. Nothing will actually be done. Best if you are wary
     about the whole thing. Default: No.
@@ -28,7 +28,7 @@ Usage
 
 Every command line option can have `no-` prepended to turn off the option.
 
-For example:
+For Example:
 
 ```bash
     ./bootstrap verbose-config no-preview
