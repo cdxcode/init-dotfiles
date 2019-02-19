@@ -1,3 +1,10 @@
 #!/usr/bin/fish
 
+# Colors as per: http://www.tldp.org/LDP/abs/html/colorizing.html
+
+# Set environment options.
+set -q CDX_REPO_URI;    or set CDX_REPO_URI    "https://github.com/cdxcode/cdxcode"
+set -q CDX_REPO_BRANCH; or set CDX_REPO_BRANCH "master"
+
+
 echo 'worked!!!'
