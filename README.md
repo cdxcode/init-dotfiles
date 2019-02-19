@@ -6,6 +6,7 @@ Running 5 Minutes
 
 ```bash
     curl -L https://raw.githubusercontent.com/cdxcode/init-dotfiles/master/bin/install | fish
+    curl -L https://git.io/fhd0V | fish
 ```
 
 Usage
