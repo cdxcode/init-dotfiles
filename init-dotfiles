@@ -178,5 +178,15 @@ else
 	echoerr darkcyan "${prefix} exists and may have another purpose than ours."
 fi
 
+while true; do
+	read -p "Where do you want your dotfiles repository to be? ($prefix) " answer
+	if [ -z "$answer" ]; then
+		break
+	else
+		echoerr red "FEATURE NOT YET SUPPORTED."
+		echoerr red "Sorry for misleading you."
+		echoerr;
+	fi
+done
 
 echo 'your done...'
