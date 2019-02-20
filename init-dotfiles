@@ -161,4 +161,10 @@ dotlink=''
 dotshell=''
 installerrun=1;
 
+echoerr blue "Welcome to the configuration generator for Dotbot"
+echoerr blue "Please be aware that if you have a complicated setup, you may need more customization than this script offers."
+echoerr;
+echoerr blue "At any time, press ^C to quit. No changes will be made until you confirm."
+echoerr;
+
 echo 'init started...'
