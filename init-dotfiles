@@ -167,4 +167,6 @@ echoerr;
 echoerr blue "At any time, press ^C to quit. No changes will be made until you confirm."
 echoerr;
 
-echo 'init started...'
+appendshell start
+
+echo 'your done...'
