@@ -111,7 +111,6 @@ appendshell() {
 		gitinitialcommit)
 			add='git add -A; git commit -m "Initial commit";'
 			;;
-
 	esac
 	setupshell=$setupshell' '$add
 }
