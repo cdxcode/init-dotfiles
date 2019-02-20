@@ -65,4 +65,14 @@ if [ $? -eq 1 ]; then
 	exit;
 fi
 
+appendshell() {
+    echo 'appendshell(): called...'
+}
+
+testmode=0;
+verboseconf=0;
+dumpconf=0;
+preview=1;
+colors=0;
+
 echo 'init started...'
