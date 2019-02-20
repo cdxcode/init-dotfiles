@@ -169,4 +169,14 @@ echoerr;
 
 appendshell start
 
+prefix="~/.dotfiles"
+prefixfull="${prefix/\~/${HOME}}"
+
+if ! [ -d $prefixfull ]; then
+	echoerr darkcyan "${prefix} is not in use."
+else
+	echoerr darkcyan "${prefix} exists and may have another purpose than ours."
+fi
+
+
 echo 'your done...'
