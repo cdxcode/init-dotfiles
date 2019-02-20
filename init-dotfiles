@@ -58,4 +58,11 @@ echoerr() {
 
 printferr() { printf "$@" >&2; }
 
+$(which git >& /dev/null)
+
+if [ $? -eq 1 ]; then
+	echoerr red "Git not found! Confirm it is indeed installed and reachable."
+	exit;
+fi
+
 echo 'init started...'
