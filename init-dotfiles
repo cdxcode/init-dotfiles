@@ -75,4 +75,52 @@ dumpconf=0;
 preview=1;
 colors=0;
 
+while [ $# -ne 0 ]; do
+	case "$1" in
+		test)
+			testmode=1;
+			echoerr darkcyan "Test mode enabled."
+			;;
+		no-test)
+			testmode=0;
+			echoerr darkcyan "Test mode disabled."
+			;;
+		verbose-config)
+			verboseconf=1;
+			echoerr darkcyan "Verbose configuration file active."
+			;;
+		no-verbose-config)
+			verboseconf=0;
+			echoerr darkcyan "Concise configuration file active."
+			;;
+		dump-config)
+			dumpconf=1;
+			echoerr darkcyan "Will dump config to stdout."
+			;;
+		no-dump-config)
+			dumpconf=0;
+			echoerr darkcyan "Will not dump config to stdout."
+			;;
+		preview)
+			preview=1;
+			echoerr darkcyan "Will show commands to be executed."
+			;;
+		no-preview)
+			preview=0;
+			echoerr darkcyan "Will not show commands to be executed."
+			;;
+		colors)
+			colors=1;
+			echoerr darkcyan "Will print with colors."
+			;;
+		no-colors)
+			colors=0;
+			echoerr darkcyan "No color."
+			;;
+		*)
+			echoerr red "Unfamiliar configuration option"
+	esac
+	shift
+done
+
 echo 'init started...'
