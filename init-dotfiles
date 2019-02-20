@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-
 # Colors as per: http://www.tldp.org/LDP/abs/html/colorizing.html
 
 echoerrcolor() {
@@ -32,7 +31,6 @@ echoerrcolor() {
 			darkmagenta)
 				str="\e[1;35m"
 				;;
-
 		esac
 		echo -ne $str >&2;
 	fi
@@ -66,7 +64,56 @@ if [ $? -eq 1 ]; then
 fi
 
 appendshell() {
-    echo 'appendshell(): called...'
+	case "$1" in
+		start)
+			add='echo "Setting up Dotbot. Please do not ^C." >&2;'
+			;;
+		mkprefix)
+			add="mkdir -p $2; cd $2;"
+			;;
+		gitinit)
+			add='git init;'
+			;;
+		gitaddsub)
+			add='git submodule add https://github.com/anishathalye/dotbot;'
+			;;
+		gitinstallinstall)
+			add='cp dotbot/tools/git-submodule/install .;'
+			;;
+		ensureparentdirs)
+			add="mkdir -p $2; rmdir $2;"
+			;;
+		mv)
+			add="mv $2 $3;"
+			;;
+		echoconfig)
+			add='echo -e "'$2'" >> '$3';'
+			;;
+		runinstaller)
+			add='./install;'
+			;;
+		gitsetname)
+			if (( $3 )); then
+				global=' --global '
+			else
+				global=' '
+			fi
+			add='git config'$global'user.name "'$2'";'
+			;;
+		gitsetemail)
+			if (( $3 )); then
+				global=' --global '
+			else
+				global=' '
+			fi
+			add='git config'$global'user.email "'$2'";'
+			;;
+		gitinitialcommit)
+			add='git add -A; git commit -m "Initial commit";'
+			;;
+
+	esac
+	setupshell=$setupshell' '$add
 }
 
 testmode=0;
@@ -242,9 +289,11 @@ declare -i i;
 for item in ${paths[*]}
 do
 	fullname="${item/\~/$HOME}"
+
 	if [ -h $fullname ]; then
 		continue;
 	fi
+
 	if [ -f $fullname ] || [ -d $fullname ]; then
 		while true; do
 			read -p "I found ${item}, do you want to Dotbot it? (Y/n) " answer
@@ -278,22 +327,27 @@ do
 	fullname="${item/\~/$HOME}"
 	firstdot=`echo "$item" | sed -n "s/[.].*//p" | wc -c`
 	firstslash=`echo "$item" | sed -n "s/[/].*//p" | wc -c`
-	if [ -d $fullname ]; then
+	
+    if [ -d $fullname ]; then
 		itempath=$item'/'
 	else
 		itempath=$item
 	fi
+
 	if [[ $firstdot -gt $firstslash ]] ; then
 		itempath=${itempath:$firstdot};
 	else
 		itempath=${itempath:$firstslash};
 	fi
+
 	nextslash=`echo "$itempath" | sed -n "s/[/].*//p" | wc -c`
-	if [[ $nextslash -gt 0 ]]; then
+	
+    if [[ $nextslash -gt 0 ]]; then
 		entryisdir='true';
 	else
 		entryisdir='false';
 	fi
+
 	if (( $verboseconf )); then
 		new_entry=$newline$hspace$item':'
 		new_entry=$new_entry$newline$hspace$hspace'path: '$itempath
@@ -319,6 +373,7 @@ appendshell echoconfig "$installconfyaml" 'install.conf.yaml'
 
 getgitinfo=0
 gitinfoglobal=0
+
 if (( $installerrun )); then
 	$(git config user.name >& /dev/null && git config user.email >& /dev/null)
 
@@ -369,6 +424,7 @@ if (( $installerrun )); then
 		done
 	fi
 fi
+
 if (( $getgitinfo )); then
 	$(git config user.name >& /dev/null)
 	if [ $? -ne 0 ]; then
@@ -440,11 +496,14 @@ while (( $installerrun )); do
 done
 
 echoerr;
+
 if (( $dumpconf )); then
 	echo -e "$dotlink"
 	echoerr
 fi
+
 echoerr magenta "The below are the actions that will be taken to setup Dotbot."
+
 if (( $testmode )); then
 	echoerr darkmagenta "Just kidding. They won't be."
 fi
