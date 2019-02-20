@@ -1,6 +1,0 @@
-#!/usr/bin/bash
-
-set -e
-
-echo 'install called...'
-
