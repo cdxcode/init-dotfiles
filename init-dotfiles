@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 # Colors as per: http://www.tldp.org/LDP/abs/html/colorizing.html
 
+# Echo Error Color
 echoerrcolor() {
 	if (( $colors )); then
 		case $1 in
@@ -36,12 +37,14 @@ echoerrcolor() {
 	fi
 }
 
+# Echo Error No Color
 echoerrnocolor() {
 	if (( $colors )); then
 		echo -ne "\e[0m" >&2;
 	fi
 }
 
+# Echo Error
 echoerr() { 
 	if [ $# -gt 1 ]; then
 		color=$1
@@ -54,6 +57,7 @@ echoerr() {
 	fi
 }
 
+# Print Error
 printferr() { printf "$@" >&2; }
 
 $(which git >& /dev/null)
@@ -63,6 +67,7 @@ if [ $? -eq 1 ]; then
 	exit;
 fi
 
+# Append Shell
 appendshell() {
 	case "$1" in
 		start)
